@@ -4,14 +4,15 @@
 # $1, $2, $3 , ...etc are passed arguments
 # $1 is our command
 CMD=$1
+: ${CMD:=start}  # default to start if not set
 
 # set env params:
 # export MYEVN
 
 case "$CMD" in
   "start" )
-    # exec /usr/bin/env perl ./http-echo.pl prefork -w ${FORKS} -l "http://*:${LISTEN_PORT}"
-    /usr/sbin/vernemq console
+    cd /opt/vernemq
+    /usr/local/bin/su-exec nobody:nogroup ./bin/vernemq console -noshell -noinput
     ;;
 
    * )

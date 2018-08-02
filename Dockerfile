@@ -8,6 +8,7 @@ MAINTAINER "Michael Fung <hkuser2001@gmail.com>"
 # exclude doc and man pages from packages
 #
 COPY 01_nodoc /etc/dpkg/dpkg.cfg.d/01_nodoc
+COPY tmp/su-exec /usr/local/bin/
 
 RUN apt-get update && apt-get install -y \
     libssl1.0.0 libssl1.1 libssl-dev \
@@ -15,16 +16,23 @@ RUN apt-get update && apt-get install -y \
     sudo less \
     curl \
     jq \
+    iproute2 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*  # cleanup to save space
+
+#
+# prepare user and group to run app
+#
+RUN groupadd -r app && useradd -r -g app app
 
 #
 # download the deb package and install
 #
 # ADD https://bintray.com/artifact/download/erlio/vernemq/deb/bionic/vernemq_1.4.1-1_amd64.deb /tmp/vernemq.deb
 # use local copy to speed up rebuild
-COPY tmp/vernemq_1.4.1-1_amd64.deb /tmp/vernemq.deb
-RUN dpkg -i /tmp/vernemq.deb \
-    && rm /tmp/vernemq.deb
+COPY tmp/vmq-bin-package.tar.gz /tmp/
+RUN tar zxvf /tmp/vmq-bin-package.tar.gz -C /opt \
+    && chown -R nobody:nogroup /opt/vernemq \
+    && rm /tmp/vmq-bin-package.tar.gz
 
 #
 # expose ports
