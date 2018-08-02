@@ -10,6 +10,8 @@ MAINTAINER "Michael Fung <hkuser2001@gmail.com>"
 COPY 01_nodoc /etc/dpkg/dpkg.cfg.d/01_nodoc
 COPY tmp/su-exec /usr/local/bin/
 
+ARG VMQ_BIN_FILE_URL=http://192.168.0.1/usbhd/tmp/vmq-bin-1.4.1.tgz
+
 RUN apt-get update && apt-get install -y \
     libssl1.0.0 libssl1.1 libssl-dev \
     logrotate \
@@ -19,20 +21,8 @@ RUN apt-get update && apt-get install -y \
     iproute2 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*  # cleanup to save space
 
-#
-# prepare user and group to run app
-#
-RUN groupadd -r app && useradd -r -g app app
-
-#
-# download the deb package and install
-#
-# ADD https://bintray.com/artifact/download/erlio/vernemq/deb/bionic/vernemq_1.4.1-1_amd64.deb /tmp/vernemq.deb
-# use local copy to speed up rebuild
-COPY tmp/vmq-bin-package.tar.gz /tmp/
-RUN tar zxvf /tmp/vmq-bin-package.tar.gz -C /opt \
-    && chown -R nobody:nogroup /opt/vernemq \
-    && rm /tmp/vmq-bin-package.tar.gz
+RUN curl $VMQ_BIN_FILE_URL | tar zxvf - -C /opt \
+    && chown -R nobody:nogroup /opt/vernemq
 
 #
 # expose ports
