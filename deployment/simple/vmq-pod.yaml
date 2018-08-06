@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vmq
+  labels:
+    app: vmq
+spec:
+  containers:
+  - name: vmq
+    image: michaelfung/vmq:1.4.1
+    env:
+    - name: VMQ_SAMPLE_ENV
+      value: example
+    ports:
+    - containerPort: 1883
+      name: mqtt
+    - containerPort: 8888
+      name: vmq-metrics
+    volumeMounts:
+    - mountPath: /opt/vernemq/data
+      name: data
+    - mountPath: /opt/vernemq/log
+      name: log
+    - mountPath: /opt/vernemq/etc
+      name: config
+  volumes:
+    - name: data
+      emptyDir: {}
+    - name: log
+      emptyDir: {}
+    - name: config
+      configMap:
+        name: vmq-config
+        items:
+        - key: vernemq.conf
+          path: vernemq.conf
+        - key: vmq.acl
+          path: vmq.acl
