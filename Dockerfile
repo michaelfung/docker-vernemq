@@ -34,10 +34,14 @@ RUN curl $VMQ_BIN_FILE_URL | tar zxvf - -C /opt \
     && chown -R nobody:nogroup /opt/vernemq
 
 #
-# expose ports
+# expose ports ( 8885 and 8887 are for SIOT )
 #
 EXPOSE 1883
+EXPOSE 1885
+EXPOSE 1887
 EXPOSE 8883
+EXPOSE 8885
+EXPOSE 8887
 EXPOSE 8080
 # VerneMQ Message Distribution
 EXPOSE 44053
