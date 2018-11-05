@@ -1,8 +1,13 @@
 # Deployment for SIOT
 
-## create secret
+## generate tls cert and key
 
-    generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1] [--dry-run]
+    Place the cert and key file in ./tls folder
+
+## create secret to hold the cert and key
+
+    # syntax:
+    # generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1] [--dry-run]
 
     kubectl create secret generic vmq-tls --from-file=./tls
 

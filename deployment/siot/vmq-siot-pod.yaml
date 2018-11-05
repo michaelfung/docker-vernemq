@@ -3,14 +3,17 @@ kind: Pod
 metadata:
   name: vmq-siot
   labels:
-    app: vmq-siot
+    app: "vmq-siot"
 spec:
   containers:
   - name: vmq
-    image: michaelfung/vmq:1.4.1
+    image: michaelfung/vmq:1.4.1-siot-2
     env:
     - name: VMQ_SAMPLE_ENV
       value: example
+    # use RAM only for QoS
+    - name: VMQ_USE_RAM
+      value: "yes"
     ports:
     - containerPort: 1883
       name: mqtt

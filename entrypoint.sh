@@ -32,7 +32,7 @@ disable_leveldb() {
     done
 }
 
-if [ -n ${VMQ_USE_RAM} ] ;
+if [ -n ${VMQ_USE_RAM} ] ; then
     disable_leveldb &
 fi
 
