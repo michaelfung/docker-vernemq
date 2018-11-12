@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: vmq-siot
   labels:
-    app: "vmq-siot"
+    daemon: "vmq-siot"
 spec:
   containers:
   - name: vmq

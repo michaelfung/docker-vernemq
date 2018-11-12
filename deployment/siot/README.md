@@ -29,3 +29,25 @@ Create pod:
 
     # delete if aleady exists: kubectl delete pod/vmq-siot
     kubectl create -f ./vmq-siot-pod.yaml
+
+
+## expose the ports to the world
+
+Use NodePort so that we can test easily from outside by a port forwarding rule, or IP mapping:
+
+    kubectl expose pod vmq-siot --type NodePort --target-port=8885 --name=vmq-mqtt-ssl
+    kubectl expose pod vmq-siot --type NodePort --target-port=8888 --name=vmq-metrics
+
+Read the assigned ports:
+
+    kubectl get services | grep vmq
+    vmq-metrics    NodePort    10.43.85.243    <none>        8888:31608/TCP   11m
+    vmq-mqtt-ssl   NodePort    10.43.30.174    <none>        8885:32389/TCP   12m
+
+Test it using Node's address (e.g. ros-node3.lan):
+
+    curl -q "http://ros-node3.lan:31608/metrics"
+
+Test it using cluster address (must test from inside cluster):
+
+    curl -q "http://vmq-metrics:8888/metrics"
