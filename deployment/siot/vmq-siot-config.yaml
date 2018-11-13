@@ -192,18 +192,18 @@ data:
     ##
     ## Acceptable values:
     ##   - an IP/port pair, e.g. 127.0.0.1:10011
-    listener.tcp.default = 0.0.0.0:1883
+    listener.tcp.default = 127.0.0.1:1883
 
     ## tls/ssl key/cert config:
-    listener.ssl.cafile = ./tls/siot-ca-chain.crt  # incl intermediate certs
-    listener.ssl.certfile = ./tls/siot-wildcard-server.crt  # 1 cert ONLY!
-    listener.ssl.keyfile = ./tls/siot-wildcard-server.key
+    listener.ssl.cafile = ./tls/siot-ca-chain.crt
+    listener.ssl.certfile = ./tls/siot-wilcard-server.crt
+    listener.ssl.keyfile = ./tls/siot-wilcard-server.key
 
     # listener for things
-    listener.tcp.things =  0.0.0.0:1885
-    listener.tcp.things.mountpoint = things
+    #listener.tcp.things =  0.0.0.0:1885
+    #listener.tcp.things.mountpoint = things
     # ssl listener for things
-    listener.ssl.things = 0.0.0.0:8885
+    listener.ssl.things = 0.0.0.0:8883
     listener.ssl.things.mountpoint = things
     #listener.ssl.things.cafile = ./tls/siot-root-ca.crt
     #listener.ssl.things.certfile = ./tls/siot-wilcard-server.crt
@@ -242,7 +242,7 @@ data:
     ##
     ## Acceptable values:
     ##   - an IP/port pair, e.g. 127.0.0.1:10011
-    listener.http.default = 127.0.0.1:8888
+    listener.http.default = 0.0.0.0:8888
 
     ## Set the mountpoint on the protocol level or on the listener level
     ## - listener.tcp.mountpoint
@@ -1139,9 +1139,9 @@ data:
 
 kind: ConfigMap
 metadata:
-  creationTimestamp: 2018-08-06T07:16:56Z
+  creationTimestamp: 2018-11-13T10:05:52Z
   name: vmq-siot-config
   namespace: default
-  resourceVersion: "80059"
+  resourceVersion: "225587"
   selfLink: /api/v1/namespaces/default/configmaps/vmq-siot-config
-  uid: b3d30251-9948-11e8-baa2-080027cedb6d
+  uid: b3f842a7-e72b-11e8-88b1-0800272fc481

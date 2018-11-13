@@ -15,10 +15,10 @@ spec:
     - name: VMQ_USE_RAM
       value: "yes"
     ports:
-    - containerPort: 1883
-      name: mqtt
     - containerPort: 8883
-      name: mqtt-ssl
+      name: mqtt-things
+    - containerPort: 8885
+      name: mqtt-users
     - containerPort: 8888
       name: vmq-metrics
     volumeMounts:

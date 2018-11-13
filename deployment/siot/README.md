@@ -35,7 +35,8 @@ Create pod:
 
 Use NodePort so that we can test easily from outside by a port forwarding rule, or IP mapping:
 
-    kubectl expose pod vmq-siot --type NodePort --target-port=8885 --name=vmq-mqtt-ssl
+    kubectl expose pod vmq-siot --type NodePort --target-port=8883 --name=mqtt-things
+    kubectl expose pod vmq-siot --type NodePort --target-port=8885 --name=mqtt-users
     kubectl expose pod vmq-siot --type NodePort --target-port=8888 --name=vmq-metrics
 
 Read the assigned ports:
