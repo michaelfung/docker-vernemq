@@ -195,9 +195,9 @@ data:
     listener.tcp.default = 0.0.0.0:1883
 
     ## tls/ssl key/cert config:
-    listener.ssl.cafile = ./tls/siot-root-ca.crt
-    listener.ssl.certfile = ./tls/siot-wilcard-server.crt
-    listener.ssl.keyfile = ./tls/siot-wilcard-server.key
+    listener.ssl.cafile = ./tls/siot-ca-chain.crt  # incl intermediate certs
+    listener.ssl.certfile = ./tls/siot-wildcard-server.crt  # 1 cert ONLY!
+    listener.ssl.keyfile = ./tls/siot-wildcard-server.key
 
     # listener for things
     listener.tcp.things =  0.0.0.0:1885

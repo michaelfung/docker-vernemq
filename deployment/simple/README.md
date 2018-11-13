@@ -27,5 +27,4 @@ Create pod:
 Create service for the pod:
 
     kubectl expose pod vmq --port=1883 --name=mqtt
-    kubectl expose pod vmq --port=8883 --name=mqtt-ssl
     kubectl expose pod vmq --port=8888 --name=vmq-metrics
