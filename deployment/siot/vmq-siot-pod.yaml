@@ -17,7 +17,7 @@ spec:
     ports:
     - containerPort: 8883
       name: mqtt-things
-    - containerPort: 8885
+    - containerPort: 8887
       name: mqtt-users
     - containerPort: 8888
       name: vmq-metrics
