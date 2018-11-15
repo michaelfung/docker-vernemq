@@ -30,6 +30,17 @@ spec:
       name: config
     - mountPath: /opt/vernemq/tls
       name: tls
+    readinessProbe:
+      tcpSocket:
+        port: mqtt-things
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    livenessProbe:
+      tcpSocket:
+        port: mqtt-things
+      initialDelaySeconds: 30
+      periodSeconds: 30
+
   volumes:
     - name: data
       emptyDir: {}

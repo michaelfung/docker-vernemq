@@ -49,13 +49,13 @@ Read the assigned ports:
     kubectl get services | grep vmq
     vmq          NodePort    10.43.62.230    <none>        8883:32693/TCP,8885:32224/TCP,8888:30042/TCP   18h
 
-Test it using Node's address (e.g. ros-node3.lan):
+Test it using Node's address (e.g. ros-node3.lan) from outside:
 
-    curl -q "http://ros-node3.lan:31608/metrics"
+    curl -q "http://ros-node3.lan:30042/metrics"
 
 Test it using cluster address (must test from inside cluster):
 
-    curl -q "http://vmq-metrics:8888/metrics"
+    curl -q "http://vmq:8888/metrics"
 
 Test SSL connection to mqtt port from outside of cluster:
 
