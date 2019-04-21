@@ -1,6 +1,6 @@
-# example: docker build -t vmq:1.4.1 .
+# example: docker build -t vmq:1.7.1-siot-1 .
 
-FROM ubuntu:bionic
+FROM debian:stretch
 
 MAINTAINER "Michael Fung <hkuser2001@gmail.com>"
 
@@ -9,23 +9,28 @@ MAINTAINER "Michael Fung <hkuser2001@gmail.com>"
 #
 COPY 01_nodoc /etc/dpkg/dpkg.cfg.d/01_nodoc
 COPY tmp/su-exec /usr/local/bin/
+COPY tmp/kerl /usr/local/bin/
 
 #
 # url of the prebuilt binary
 #
-ARG VMQ_BIN_FILE_URL=http://192.168.0.1/usbhd/tmp/vmq-bin-1.4.1.tgz
+ARG OTP_FILE_URL=http://192.168.0.1/usbhd/tmp/otp-21.3.tgz
+ARG VMQ_BIN_FILE_URL=http://192.168.0.1/usbhd/tmp/vmq-bin-1.7.1.tgz
 
 #
 # install required binary lib and tools
 #
 RUN apt-get update && apt-get install -y \
-    libssl1.0.0 libssl1.1 libssl-dev \
-    logrotate \
+    libssl1.0.2 libssl1.1 \
     sudo less \
     curl \
-    jq \
     iproute2 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*  # cleanup to save space
+
+#
+# install the OTP binary, hardcoded folder location /opt/otp/<version>
+#
+RUN curl $OTP_FILE_URL | tar zPxvf -
 
 #
 # install the vmq binary

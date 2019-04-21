@@ -9,6 +9,8 @@ CMD=$1
 # set env params:
 # export MYEVN
 
+# load erlang OTP environment
+source /opt/otp/21.3/activate
 
 #
 # disable leveldb to speed up perf when using QoS 1/2
@@ -32,7 +34,7 @@ disable_leveldb() {
     done
 }
 
-if [ -n ${VMQ_USE_RAM} ] ; then
+if [[ -n "$VMQ_USE_RAM" ]] ; then
     disable_leveldb &
 fi
 

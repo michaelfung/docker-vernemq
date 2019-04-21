@@ -14,6 +14,6 @@ Set environment `VMQ_USE_RAM` to 'y'.
 Ref: [Subscriber message delivery performance](https://github.com/erlio/vernemq/issues/771)
 
 
-## Run with docker
+## Quick Test Run
 
-  docker run -d --name vmq-siot -e VMQ_USE_RAM=y -p 8903:1883 -p 8988:8888 --restart=unless-stopped michaelfung/vmq:1.4.1-siot-2
+  docker run --rm -e VMQ_USE_RAM=y -p 8903:1883 -p 8988:8888 michaelfung/vmq:1.7.1-siot-1
