@@ -29,6 +29,7 @@ spec:
     - mountPath: /opt/vernemq/etc
       name: config
     - mountPath: /opt/vernemq/tls
+      readOnly: true
       name: tls
     readinessProbe:
       tcpSocket:
@@ -56,4 +57,6 @@ spec:
           path: vmq.acl
     - name: tls
       secret:
+        # file mode 440 (288 in decimal)
+        # defaultMode: 288  # not used because already mount Readonly
         secretName: "vmq-tls"
